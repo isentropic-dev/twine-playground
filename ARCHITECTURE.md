@@ -105,6 +105,19 @@ Starting a new execution terminates any existing worker.
 Server code runs on Deno, leveraging native TypeScript support.
 Browser code is transpiled via `@deno/emit` before serving.
 
+## Deployment
+
+**Build Strategy (Not Yet Implemented)**
+For production deployment to CDN (S3 + CloudFront),
+the project will use a pure Deno build script.
+The build process will use `@deno/emit` (same library as the dev server) to transpile TypeScript to JavaScript,
+copy static assets to a `dist/` folder,
+and update HTML references with cache-busting version parameters (simple timestamp or hash).
+
+This approach maintains tooling simplicity and keeps the entire project Deno-native,
+avoiding the need for Node.js or additional bundlers like Vite.
+The build script will be straightforward (~50-100 lines) and easy to understand.
+
 ## Future Extension Points
 
 **External Library Integration**
