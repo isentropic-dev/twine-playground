@@ -18,7 +18,7 @@ console.log(greeting);
 // console.log(multiply(5, 3));
 `,
         language: 'typescript',
-        theme: 'vs-dark',
+        theme: 'vs',
         automaticLayout: true,
         minimap: { enabled: false },
         fontSize: 14,
