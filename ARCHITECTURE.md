@@ -10,15 +10,15 @@ and see results in an output pane.
 The architecture follows a simple pattern:
 a main thread manages the UI and editor,
 while a Web Worker provides isolated code execution.
-Deno serves as the development server,
-transpiling TypeScript to JavaScript on the fly.
+Vite serves as the development server and build tool,
+bundling Monaco Editor and handling TypeScript compilation.
 
 ## Code Map
 
 ### Entry Points
 
-- `server.ts` - Deno HTTP server that serves static files and transpiles TypeScript
-- `index.html` - Main HTML page, loads Monaco Editor from CDN and bootstraps the app
+- `vite.config.ts` - Vite configuration with Deno and Monaco Editor plugins
+- `index.html` - Main HTML page, loads Monaco Editor and bootstraps the app
 - `src/main.ts` - Application entry point, wires together editor, runner, and output
 
 ### Core Modules
@@ -39,7 +39,7 @@ transpiling TypeScript to JavaScript on the fly.
 **Worker (`src/worker.ts`)**
 - Runs in isolated Web Worker context
 - Intercepts console.log/error to capture output
-- Executes user code via `eval()`
+- Executes user code via dynamic `import()` with Blob URLs
 - Posts results back to main thread
 
 **Output (`src/output.ts`)**
@@ -50,11 +50,11 @@ transpiling TypeScript to JavaScript on the fly.
 
 ### Infrastructure
 
-**Server (`server.ts`)**
-- HTTP server using Deno.serve
-- Transpiles .ts files to JavaScript using `@deno/emit` bundler
-- Serves static files (HTML, CSS) with correct MIME types
-- Runs on port 8000
+**Vite (`vite.config.ts`)**
+- Development server with HMR support
+- Bundles Monaco Editor assets via `vite-plugin-monaco-editor`
+- Integrates Deno with `@deno/vite-plugin`
+- Runs on port 5173 by default
 
 **Styles (`styles.css`)**
 - CSS Grid layout for split-pane interface
@@ -85,7 +85,7 @@ Errors are caught at multiple levels:
 **No Framework Dependencies**
 The project uses vanilla TypeScript with direct DOM manipulation.
 Monaco Editor is the only external dependency,
-loaded via CDN.
+bundled via npm and Vite.
 
 **TypeScript-First**
 Users write TypeScript exclusively.
@@ -101,22 +101,13 @@ Workers are terminated after execution or timeout to prevent resource leaks.
 Only one worker exists at a time.
 Starting a new execution terminates any existing worker.
 
-**Deno-Native Serving**
-Server code runs on Deno, leveraging native TypeScript support.
-Browser code is transpiled via `@deno/emit` before serving.
-
 ## Deployment
 
 **Build Strategy (Not Yet Implemented)**
 For production deployment to CDN (S3 + CloudFront),
-the project will use a pure Deno build script.
-The build process will use `@deno/emit` (same library as the dev server) to transpile TypeScript to JavaScript,
-copy static assets to a `dist/` folder,
-and update HTML references with cache-busting version parameters (simple timestamp or hash).
-
-This approach maintains tooling simplicity and keeps the entire project Deno-native,
-avoiding the need for Node.js or additional bundlers like Vite.
-The build script will be straightforward (~50-100 lines) and easy to understand.
+the project will use Vite's build command (`vite build`).
+Vite will bundle all assets, optimize Monaco Editor,
+and generate production-ready files in a `dist/` folder with automatic cache-busting.
 
 ## Future Extension Points
 
