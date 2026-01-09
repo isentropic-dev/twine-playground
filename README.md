@@ -1,5 +1,5 @@
 # twine-playground
-A web playground for Twine's Typescript interface.
+A web playground for Twine's TypeScript interface.
 
 ## Development
 
