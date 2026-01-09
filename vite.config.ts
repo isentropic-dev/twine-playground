@@ -3,5 +3,8 @@ import deno from "@deno/vite-plugin";
 import monacoEditorPlugin from "vite-plugin-monaco-editor";
 
 export default defineConfig({
-  plugins: [deno(), monacoEditorPlugin.default({})],
+  plugins: [
+    deno(),
+    monacoEditorPlugin.default({ languageWorkers: ["typescript"] }),
+  ],
 });
