@@ -1,5 +1,5 @@
 # twine-playground
-A web playground for Twine's Typescript interface.
+A web playground for Twine's TypeScript interface.
 
 ## Development
 
@@ -9,7 +9,7 @@ Start the development server:
 deno task dev
 ```
 
-Then open http://localhost:8000 in your browser.
+Then open http://localhost:5173 in your browser.
 
 ## Requirements
 
