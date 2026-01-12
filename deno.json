@@ -9,6 +9,7 @@
   "nodeModulesDir": "auto",
   "imports": {
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.6",
+    "@isentropic/twine": "jsr:@isentropic/twine@^0.1.0",
     "monaco-editor": "npm:monaco-editor@^0.55.1",
     "vite": "npm:vite@^7.3.1",
     "vite-plugin-monaco-editor": "npm:vite-plugin-monaco-editor@^1.1.0"

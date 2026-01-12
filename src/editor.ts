@@ -1,4 +1,28 @@
 import * as monaco from "monaco-editor";
+import { typeDefs, esmMapping } from "./monacoTypes.ts";
+
+// Configure TypeScript compiler options
+monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+  target: monaco.languages.typescript.ScriptTarget.ES2020,
+  module: monaco.languages.typescript.ModuleKind.ESNext,
+  moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
+  strict: true,
+  esModuleInterop: true,
+  allowSyntheticDefaultImports: true,
+});
+
+// Register all type definitions with Monaco
+for (const { path, content } of typeDefs) {
+  monaco.languages.typescript.typescriptDefaults.addExtraLib(content, path);
+}
+
+// Map ESM URL to safe-units module
+monaco.languages.typescript.typescriptDefaults.addExtraLib(
+  esmMapping,
+  "file:///node_modules/@types/esm-sh-mappings.d.ts"
+);
+
+console.log(`✓ Registered ${typeDefs.length + 1} type definitions`);
 
 monaco.languages.register({ id: "typescript" });
 

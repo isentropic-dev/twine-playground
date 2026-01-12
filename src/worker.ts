@@ -18,6 +18,7 @@ self.onmessage = async (e) => {
     const url = URL.createObjectURL(blob);
 
     try {
+      /* @vite-ignore */
       await import(url);
       self.postMessage({ type: "result", data: undefined });
     } finally {
