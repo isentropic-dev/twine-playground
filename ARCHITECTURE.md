@@ -26,8 +26,14 @@ bundling Monaco Editor and handling TypeScript compilation.
 **Editor (`src/editor.ts`)**
 - Initializes Monaco Editor with TypeScript support
 - Configures TypeScript compiler options (strict mode, ES2020 target)
+- Registers Twine type definitions from `monacoTypes.ts`
 - Compiles TypeScript to JavaScript using Monaco's built-in compiler
 - Key type: `Editor` (alias for Monaco's IStandaloneCodeEditor)
+
+**Monaco Types (`src/monacoTypes.ts`)**
+- Imports safe-units type definitions using Vite's `?raw` suffix
+- Exports type definitions for Monaco's virtual file system
+- Maps ESM CDN URL to type definitions
 
 **Runner (`src/runner.ts`)**
 - Manages Web Worker lifecycle (creates, terminates, handles timeouts)
@@ -110,10 +116,6 @@ Vite will bundle all assets, optimize Monaco Editor,
 and generate production-ready files in a `dist/` folder with automatic cache-busting.
 
 ## Future Extension Points
-
-**External Library Integration**
-The worker can import and expose external TypeScript libraries (i.e. twine-ts).
-Library types can be added via `monaco.languages.typescript.typescriptDefaults.addExtraLib()`.
 
 **Examples System**
 When added, should use `src/examples.ts` to load and populate dropdown with example snippets.

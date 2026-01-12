@@ -19,19 +19,13 @@ playground/
 ├── index.html              # Main layout, loads modules
 ├── src/
 │   ├── main.ts            # App initialization, wires everything together
-│   ├── editor.ts          # Monaco setup, TS config, type definitions
+│   ├── editor.ts          # Monaco setup, TS config, registers types
+│   ├── monacoTypes.ts     # Type definitions for Twine library
 │   ├── output.ts          # Output pane rendering (console, errors, results)
 │   ├── runner.ts          # Manages Web Worker, executes user code
-│   ├── worker.ts          # Web Worker that loads WASM + runs code
-│   └── examples.ts        # Examples loader/manager
-├── examples/
-│   ├── basic.ts           # Simple calculation example
-│   ├── multi-step.ts      # More complex example
-│   └── index.ts           # Exports all examples with metadata
+│   └── worker.ts          # Web Worker that loads WASM + runs code
 ├── styles.css             # Layout and theming
-├── lib/
-│   └── your-thermal-lib/  # Your built WASM + TS wrapper
-└── package.json
+└── deno.json              # Deno config, dependencies
 ```
 
 ## Component Responsibilities
@@ -51,15 +45,13 @@ playground/
 
 ### editor.ts
 ```typescript
-export function initEditor(container: HTMLElement): monaco.editor.IStandaloneCodeEditor
-export function setEditorValue(editor: Editor, code: string): void
-export function getEditorValue(editor: Editor): string
-export function configureTypeScript(libTypes: string): void
+export const editor: monaco.editor.IStandaloneCodeEditor
+export function getCompiledCode(editor): Promise<string>
 ```
-- Configure Monaco with your library's `.d.ts` types
-- Enable TypeScript checking (`@ts-check`)
-- Set up editor theme
-- Handle compilation from TS to JS
+- Configures Monaco with Twine type definitions from `monacoTypes.ts`
+- Sets up TypeScript compiler options
+- Creates editor instance with default model
+- Compiles TypeScript to JavaScript via Monaco's worker
 
 ### runner.ts
 ```typescript
@@ -150,20 +142,26 @@ export function populateDropdown(select: HTMLSelectElement, examples: Example[])
 ### Monaco TypeScript Configuration
 ```typescript
 // In editor.ts
+import { typeDefs, esmMapping } from "./monacoTypes.ts";
+
 monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
   target: monaco.languages.typescript.ScriptTarget.ES2020,
-  allowNonTsExtensions: true,
-  moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
   module: monaco.languages.typescript.ModuleKind.ESNext,
-  noEmit: true,
-  esModuleInterop: true,
+  moduleResolution: monaco.languages.typescript.ModuleResolutionKind.NodeJs,
   strict: true,
+  esModuleInterop: true,
+  allowSyntheticDefaultImports: true,
 });
 
-// Add your library types
+// Register type definitions
+for (const { path, content } of typeDefs) {
+  monaco.languages.typescript.typescriptDefaults.addExtraLib(content, path);
+}
+
+// Map ESM URL to module
 monaco.languages.typescript.typescriptDefaults.addExtraLib(
-  yourLibraryDts,
-  'file:///node_modules/@your-scope/thermal-lib/index.d.ts'
+  esmMapping,
+  "file:///node_modules/@types/esm-sh-mappings.d.ts"
 );
 ```
 
