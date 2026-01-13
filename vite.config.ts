@@ -6,6 +6,9 @@ export default defineConfig({
   base: "/twine-playground/",
   plugins: [
     deno(),
-    monacoEditorPlugin.default({ languageWorkers: ["typescript"] }),
+    monacoEditorPlugin.default({
+      languageWorkers: ["editorWorkerService", "typescript"],
+      customDistPath: (root: string, buildOutDir: string, base: string) => `${buildOutDir}/monacoeditorwork`
+    }),
   ],
 });
