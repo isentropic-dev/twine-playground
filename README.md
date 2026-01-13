@@ -9,7 +9,7 @@ Start the development server:
 deno task dev
 ```
 
-Then open http://localhost:5173 in your browser.
+Then open http://localhost:5173/twine-playground/ in your browser.
 
 ## Requirements
 

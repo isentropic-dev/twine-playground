@@ -1,4 +1,5 @@
 import type { OutputMessage } from './output.ts';
+import WorkerUrl from './worker.ts?worker&url';
 
 export interface ExecutionResult {
   messages: OutputMessage[];
@@ -15,7 +16,7 @@ export function executeCode(code: string): Promise<ExecutionResult> {
       worker.terminate();
     }
 
-    worker = new Worker('/src/worker.ts', { type: 'module' });
+    worker = new Worker(WorkerUrl, { type: 'module' });
 
     worker.onmessage = (e) => {
       const { type, data } = e.data;
