@@ -3,6 +3,7 @@
   "specifiers": {
     "jsr:@deno/cache-dir@0.13.2": "0.13.2",
     "jsr:@deno/emit@0.46.0": "0.46.0",
+    "jsr:@isentropic/twine@0.1": "0.1.0",
     "jsr:@std/assert@0.223": "0.223.0",
     "jsr:@std/bytes@0.223": "0.223.0",
     "jsr:@std/fmt@0.223": "0.223.0",
@@ -11,6 +12,7 @@
     "jsr:@std/path@0.223": "0.223.0",
     "npm:@deno/vite-plugin@^1.0.6": "1.0.6_vite@7.3.1__picomatch@4.0.3",
     "npm:monaco-editor@~0.55.1": "0.55.1",
+    "npm:safe-units@^2.0.1": "2.0.1",
     "npm:vite-plugin-monaco-editor@^1.1.0": "1.1.0_monaco-editor@0.55.1",
     "npm:vite@*": "7.3.1_picomatch@4.0.3",
     "npm:vite@^7.3.1": "7.3.1_picomatch@4.0.3"
@@ -30,6 +32,12 @@
       "dependencies": [
         "jsr:@deno/cache-dir",
         "jsr:@std/path"
+      ]
+    },
+    "@isentropic/twine@0.1.0": {
+      "integrity": "1f47e0f9d4398d6847e52412d1120f074f68608498e0d6fc2341780599456f96",
+      "dependencies": [
+        "npm:safe-units"
       ]
     },
     "@std/assert@0.223.0": {
@@ -443,6 +451,9 @@
       ],
       "bin": true
     },
+    "safe-units@2.0.1": {
+      "integrity": "sha512-vwQl9r9J8O5Aj2RLW2H9qIMszs6MFHuNlD1S86E+AsOFjqZWlD76+sfwMcBT0DIpfTVtgm7Q1huM+iI3o20DYw=="
+    },
     "source-map-js@1.2.1": {
       "integrity": "sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA=="
     },
@@ -477,6 +488,7 @@
   },
   "workspace": {
     "dependencies": [
+      "jsr:@isentropic/twine@0.1",
       "npm:@deno/vite-plugin@^1.0.6",
       "npm:monaco-editor@~0.55.1",
       "npm:vite-plugin-monaco-editor@^1.1.0",
