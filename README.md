@@ -13,4 +13,4 @@ Then open http://localhost:5173/twine-playground/ in your browser.
 
 ## Requirements
 
-- [Deno](https://deno.com/) 1.40 or higher
+- [Deno](https://deno.com/) 2.0 or higher

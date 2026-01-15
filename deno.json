@@ -8,6 +8,7 @@
     "lib": ["dom", "dom.iterable", "dom.asynciterable", "deno.ns"],
     "strict": true
   },
+  "vendor": true,
   "nodeModulesDir": "auto",
   "imports": {
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.6",

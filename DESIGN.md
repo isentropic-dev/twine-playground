@@ -20,12 +20,13 @@ playground/
 ├── src/
 │   ├── main.ts            # App initialization, wires everything together
 │   ├── editor.ts          # Monaco setup, TS config, registers types
-│   ├── monacoTypes.ts     # Type definitions for Twine library
+│   ├── monacoTypes.ts     # Type definitions for Monaco (safe-units + twine)
 │   ├── output.ts          # Output pane rendering (console, errors, results)
 │   ├── runner.ts          # Manages Web Worker, executes user code
 │   └── worker.ts          # Web Worker that loads WASM + runs code
+├── vendor/                 # Vendored JSR packages (twine)
 ├── styles.css             # Layout and theming
-└── deno.json              # Deno config, dependencies
+└── deno.json              # Deno config, dependencies, vendor: true
 ```
 
 ## Component Responsibilities
@@ -164,6 +165,15 @@ monaco.languages.typescript.typescriptDefaults.addExtraLib(
   "file:///node_modules/@types/esm-sh-mappings.d.ts"
 );
 ```
+
+### Type Definition Strategy
+Monaco needs type definitions to provide IntelliSense for imports from ESM CDN URLs.
+
+**safe-units** (npm package): Types are imported from `node_modules/.deno/` as raw strings.
+
+**twine** (JSR package): Types are vendored via `vendor: true` in deno.json. The vendored TypeScript files contain Deno-style import specifiers (`npm:safe-units@^2.0.1`, relative `.ts` imports) that Monaco doesn't understand, so `monacoTypes.ts` rewrites these to bare module specifiers that Monaco can resolve.
+
+The `esmMapping` declares ambient modules for the ESM CDN URLs users import from, mapping them to the registered type paths.
 
 ### Web Worker Communication
 ```typescript
