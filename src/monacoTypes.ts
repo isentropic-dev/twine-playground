@@ -34,32 +34,109 @@ export interface TypeDefinition {
 }
 
 export const typeDefs: TypeDefinition[] = [
-  { path: "file:///node_modules/safe-units/dist/src/index.d.ts", content: safeUnitsIndex },
-  { path: "file:///node_modules/safe-units/dist/src/measure/index.d.ts", content: measureIndex },
-  { path: "file:///node_modules/safe-units/dist/src/measure/genericMeasure.d.ts", content: genericMeasure },
-  { path: "file:///node_modules/safe-units/dist/src/measure/genericMeasureClass.d.ts", content: genericMeasureClass },
-  { path: "file:///node_modules/safe-units/dist/src/measure/genericMeasureFactory.d.ts", content: genericMeasureFactory },
-  { path: "file:///node_modules/safe-units/dist/src/measure/genericMeasureStatic.d.ts", content: genericMeasureStatic },
-  { path: "file:///node_modules/safe-units/dist/src/measure/genericMeasureUtils.d.ts", content: genericMeasureUtils },
-  { path: "file:///node_modules/safe-units/dist/src/measure/numberMeasure.d.ts", content: numberMeasure },
-  { path: "file:///node_modules/safe-units/dist/src/measure/unitSystem.d.ts", content: unitSystem },
-  { path: "file:///node_modules/safe-units/dist/src/measure/unitTypeArithmetic.d.ts", content: unitTypeArithmetic },
-  { path: "file:///node_modules/safe-units/dist/src/measure/exponentTypeArithmetic.d.ts", content: exponentTypeArithmetic },
-  { path: "file:///node_modules/safe-units/dist/src/measure/format.d.ts", content: formatTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/index.d.ts", content: unitIndex },
-  { path: "file:///node_modules/safe-units/dist/src/unit/angle.d.ts", content: angleTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/base.d.ts", content: baseTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/common.d.ts", content: commonTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/memory.d.ts", content: memoryTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/metric.d.ts", content: metricTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/other.d.ts", content: otherTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/quantities.d.ts", content: quantitiesTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/imperial.d.ts", content: imperialTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/trig.d.ts", content: trigTypes },
-  { path: "file:///node_modules/safe-units/dist/src/unit/uscu.d.ts", content: uscuTypes },
+  {
+    path: "file:///node_modules/safe-units/dist/src/index.d.ts",
+    content: safeUnitsIndex,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/measure/index.d.ts",
+    content: measureIndex,
+  },
+  {
+    path:
+      "file:///node_modules/safe-units/dist/src/measure/genericMeasure.d.ts",
+    content: genericMeasure,
+  },
+  {
+    path:
+      "file:///node_modules/safe-units/dist/src/measure/genericMeasureClass.d.ts",
+    content: genericMeasureClass,
+  },
+  {
+    path:
+      "file:///node_modules/safe-units/dist/src/measure/genericMeasureFactory.d.ts",
+    content: genericMeasureFactory,
+  },
+  {
+    path:
+      "file:///node_modules/safe-units/dist/src/measure/genericMeasureStatic.d.ts",
+    content: genericMeasureStatic,
+  },
+  {
+    path:
+      "file:///node_modules/safe-units/dist/src/measure/genericMeasureUtils.d.ts",
+    content: genericMeasureUtils,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/measure/numberMeasure.d.ts",
+    content: numberMeasure,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/measure/unitSystem.d.ts",
+    content: unitSystem,
+  },
+  {
+    path:
+      "file:///node_modules/safe-units/dist/src/measure/unitTypeArithmetic.d.ts",
+    content: unitTypeArithmetic,
+  },
+  {
+    path:
+      "file:///node_modules/safe-units/dist/src/measure/exponentTypeArithmetic.d.ts",
+    content: exponentTypeArithmetic,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/measure/format.d.ts",
+    content: formatTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/index.d.ts",
+    content: unitIndex,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/angle.d.ts",
+    content: angleTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/base.d.ts",
+    content: baseTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/common.d.ts",
+    content: commonTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/memory.d.ts",
+    content: memoryTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/metric.d.ts",
+    content: metricTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/other.d.ts",
+    content: otherTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/quantities.d.ts",
+    content: quantitiesTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/imperial.d.ts",
+    content: imperialTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/trig.d.ts",
+    content: trigTypes,
+  },
+  {
+    path: "file:///node_modules/safe-units/dist/src/unit/uscu.d.ts",
+    content: uscuTypes,
+  },
 ];
 
 // Maps the ESM CDN URL to the safe-units types
-export const esmMapping = `declare module "https://esm.sh/jsr/@isentropic/twine" {
+export const esmMapping =
+  `declare module "https://esm.sh/jsr/@isentropic/twine@0.4.1" {
   export * from "safe-units/dist/src/index";
 }`;
