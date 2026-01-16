@@ -31,9 +31,11 @@ bundling Monaco Editor and handling TypeScript compilation.
 - Key type: `Editor` (alias for Monaco's IStandaloneCodeEditor)
 
 **Monaco Types (`src/monacoTypes.ts`)**
-- Imports safe-units type definitions using Vite's `?raw` suffix
+- Imports safe-units type definitions from `node_modules/.deno/` using Vite's `?raw` suffix
+- Imports twine type definitions from `vendor/` directory (JSR package, vendored via `vendor: true`)
+- Rewrites Deno-style import specifiers (`npm:`, relative `.ts`) to bare module specifiers for Monaco
 - Exports type definitions for Monaco's virtual file system
-- Maps ESM CDN URL to type definitions
+- Maps ESM CDN URLs (`https://esm.sh/jsr/@isentropic/twine@.../quantity` and `/hx`) to registered types
 
 **Runner (`src/runner.ts`)**
 - Manages Web Worker lifecycle (creates, terminates, handles timeouts)
@@ -109,11 +111,11 @@ Starting a new execution terminates any existing worker.
 
 ## Deployment
 
-**Build Strategy (Not Yet Implemented)**
-For production deployment to CDN (S3 + CloudFront),
-the project will use Vite's build command (`vite build`).
-Vite will bundle all assets, optimize Monaco Editor,
-and generate production-ready files in a `dist/` folder with automatic cache-busting.
+**Build Strategy**
+Run `deno task build` to generate production assets.
+Vite bundles all assets, optimizes Monaco Editor,
+and generates production-ready files in a `dist/` folder with automatic cache-busting.
+The build output can be deployed to any static hosting (S3 + CloudFront, GitHub Pages, etc.).
 
 ## Future Extension Points
 

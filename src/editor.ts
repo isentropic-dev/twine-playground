@@ -1,5 +1,5 @@
 import * as monaco from "monaco-editor";
-import { typeDefs, esmMapping } from "./monacoTypes.ts";
+import { esmMapping, typeDefs } from "./monacoTypes.ts";
 
 // Configure TypeScript compiler options
 monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
@@ -19,7 +19,7 @@ for (const { path, content } of typeDefs) {
 // Map ESM URL to safe-units module
 monaco.languages.typescript.typescriptDefaults.addExtraLib(
   esmMapping,
-  "file:///node_modules/@types/esm-sh-mappings.d.ts"
+  "file:///node_modules/@types/esm-sh-mappings.d.ts",
 );
 
 console.log(`✓ Registered ${typeDefs.length + 1} type definitions`);
@@ -27,7 +27,7 @@ console.log(`✓ Registered ${typeDefs.length + 1} type definitions`);
 monaco.languages.register({ id: "typescript" });
 
 const tm = monaco.editor.createModel(
-  `import { Measure, watts } from "https://esm.sh/jsr/@isentropic/twine";
+  `import { Measure, watts } from "https://esm.sh/jsr/@isentropic/twine@0.4.1/quantity";
 
 const power = Measure.of(5, watts);
 console.log(\`Power: \${power}\`);`,
